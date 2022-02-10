@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Content\PostCategory;
 use App\Http\Requests\Admin\Content\PostCategoryRequest;
+use App\Http\Services\Image\ImageService;
 
 class CategoryController extends Controller
 {
@@ -37,10 +38,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostCategoryRequest $request)
+    public function store(PostCategoryRequest $request,ImageService $imageService)
     {
         $inputs=$request->all();
-        $inputs['image']='image';
+        if($request->hasFile('image')){
+            $imageService->setExclusiveDirectory('images'.DIRECTORY_SEPARATOR.'post-category');
+            $result=$imageService->createIndexAndSave($request->file('image'));
+        }
+        if($result==false){
+            return redirect()->route('admin.content.category.index')->with('swal-error','آپلود تصویر با خطا مواجه شد');
+        }
+        $inputs['image']=$result;
         $postCategory=PostCategory::create($inputs);
         return redirect()->route('admin.content.category.index')->with('swal-success','دسته بندی جدید شما با موفقیت ثبت شد');
     }
