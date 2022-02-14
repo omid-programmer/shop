@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\content;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Content\PageRequest;
 use App\Models\Content\Page;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,11 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $inputs=$request->all();
+        $page=Page::create($inputs);
+        return redirect()->route('admin.content.page.index')->with('swal-success','صفحه جدید شیما با موفقیت ایجاد شد');
     }
 
     /**
@@ -57,9 +60,9 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Page $page)
     {
-        //
+        return view('admin.content.page.edit', compact('page'));
     }
 
     /**
@@ -69,9 +72,12 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PageRequest $request, Page $page)
     {
-        //
+        $inputs = $request->all();
+        // $inputs['slug'] = null;
+        $page->update($inputs);
+        return redirect()->route('admin.content.page.index')->with('swal-success', 'صفحه  شما با موفقیت ویرایش شد');
     }
 
     /**
@@ -80,9 +86,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        //
+        $result = $page->delete();
+        return redirect()->route('admin.content.page.index')->with('swal-success', 'صفحه  شما با موفقیت حذف شد');
     }
 
     public function status(Page $page){
