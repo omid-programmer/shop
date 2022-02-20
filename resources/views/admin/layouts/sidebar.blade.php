@@ -48,10 +48,10 @@
                     <i class="fas fa-angle-left angle"></i>
                 </section>
                 <section class="sidebar-dropdown">
-                    <a href="{{ route('admin.market.payment.index') }}">تمام پرداخت ها</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت های آنلاین</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت های آفلاین</a>
-                    <a href="{{ route('admin.market.payment.index') }}">پرداخت در محل</a>
+                    <<a href="{{ route('admin.market.payment.index') }}">تمام پرداخت ها</a>
+                    <a href="{{ route('admin.market.payment.online') }}">پرداخت های آنلاین</a>
+                    <a href="{{ route('admin.market.payment.offline') }}">پرداخت های آفلاین</a>
+                    <a href="{{ route('admin.market.payment.cash') }}">پرداخت در محل</a>
                 </section>
             </section>
 
