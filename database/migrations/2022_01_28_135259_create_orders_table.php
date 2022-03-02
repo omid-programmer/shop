@@ -36,7 +36,12 @@ class CreateOrdersTable extends Migration
             $table->longText('common_discount_object')->nullable();
             $table->decimal('order_common_discount_amount',20,3)->nullable();
             $table->decimal('order_total_products_discount_amount',20,3)->nullable();
-            $table->tinyInteger('order_status')->default(0);
+            $table->tinyInteger('order_status')->default(0)->comment('0=>بررسی نشده,
+            1=>در انتظار تایید,
+            2=>تایید نشده,
+            3=>تایید شده,
+            4=>باطل شده,
+            5=>مرجوع شده');
             $table->timestamps();
             $table->softDeletes();
         });
