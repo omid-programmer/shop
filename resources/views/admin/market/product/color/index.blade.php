@@ -50,13 +50,14 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $color->color_name }}</td>
                             <td>{{ $color->price_increase }}</td>
-                            <td class="width-8-rem text-left">
-                                <form class="d-inline" action="{{ route('admin.market.color.destroy', ['product' => $product->id, 'productColor' => $color->id]) }}" method="post">
+                            <td class="width-16-rem text-left">
+                                <form class="d-inline" action="{{ route('admin.market.color.destroy', ['product' => $product->id , 'color' => $color->id] ) }}" method="post">
                                     @csrf
                                     {{ method_field('delete') }}
-                                <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
-                            </form>
-                            </td>
+                                    <button class="btn btn-danger btn-sm delete" type="submit"><i class="fa fa-trash-alt"></i> حذف</button>
+                                </form>
+
+                        </td>
                         </tr>
 
                         @endforeach
