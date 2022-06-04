@@ -61,12 +61,13 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a href="{{ route('admin.market.gallery.index', $product->id) }}" class="dropdown-item text-right"><i class="fa fa-images"></i> گالری</a>
-                                        <a href="{{ route('admin.market.color.index', $product->id) }}" class="dropdown-item text-right"><i class="fa fa-list-ul"></i> رنگ کالا</a>
+                                           <a href="{{ route('admin.market.color.index', $product->id) }}" class="dropdown-item text-right"><i class="fa fa-images"></i> مدیریت رنگ ها</a>
+                                           <a href="{{ route('admin.market.guarantee.index', $product->id) }}" class="dropdown-item text-right"><i class="fa fa-shield-alt"></i> گارانتی</a>
                                         <a href="{{ route('admin.market.product.edit', $product->id) }}" class="dropdown-item text-right"><i class="fa fa-edit"></i> ویرایش</a>
                                         <form class="d-inline" action="{{ route('admin.market.product.destroy', $product->id) }}" method="post">
                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="dropdown-item text-right delete"><i class="fa fa-window-close"></i> حذف</button>
+                                            @method('Delete')
+                                            <button type="submit" class="dropdown-item text-right"><i class="fa fa-window-close"></i> حذف</button>
                                         </form>
                                     </div>
                                 </div>

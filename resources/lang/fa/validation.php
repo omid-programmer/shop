@@ -189,6 +189,7 @@ return [
         'discount_ceiling' => 'سقف تخفیف',
         'minimal_order_amount' => 'حداقل مبلغ',
         'product_id' => 'کالا',
-        'otp'=>'رمز یک بار مصرف'
+        'otp'=>'رمز یک بار مصرف',
+        'color'=>'رنگ'
     ],
 ];
