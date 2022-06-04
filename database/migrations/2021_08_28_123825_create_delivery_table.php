@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGuaranteesTable extends Migration
+class CreateDeliveryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateGuaranteesTable extends Migration
      */
     public function up()
     {
-        Schema::create('guarantees', function (Blueprint $table) {
+        Schema::create('delivery', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
-            $table->decimal('price_increase',20,3)->default(0);
+            $table->decimal('amount', 20, 3)->nullable();
+            $table->integer('delivery_time')->nullable();
+            $table->string('delivery_time_unit')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +32,6 @@ class CreateGuaranteesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('guarantees');
+        Schema::dropIfExists('delivery');
     }
 }

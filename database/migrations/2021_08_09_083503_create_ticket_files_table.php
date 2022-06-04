@@ -19,7 +19,7 @@ class CreateTicketFilesTable extends Migration
             $table->bigInteger('file_size');
             $table->string('file_type');
             $table->tinyInteger('status')->default(0);
-            $table->foreignId('ticket_id')->constrained('tickets')->onUpdate('cascade')->onDelete('cascade');   
+            $table->foreignId('ticket_id')->constrained('tickets')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

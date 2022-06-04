@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductUserTable extends Migration
+class CreateGuaranteesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateProductUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_user', function (Blueprint $table) {
+        Schema::create('guarantees', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->primary(['product_id','user_id']);
+            $table->decimal('price_increase', 20, 3)->default(0);
+            $table->tinyInteger('status')->default(0);
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +31,6 @@ class CreateProductUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_user');
+        Schema::dropIfExists('guarantees');
     }
 }

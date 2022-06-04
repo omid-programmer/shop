@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOfflinePaymentsTable extends Migration
+class CreateProductUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateOfflinePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('offline_payments', function (Blueprint $table) {
-            $table->id();
-            $table->decimal('amount',20,3);
+        Schema::create('product_user', function (Blueprint $table) {
+
+            $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('transaction_id')->nullable();
-            $table->timestamp('pay_date');
-            $table->tinyInteger('status')->default(0);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->primary(['product_id', 'user_id']);
         });
     }
 
@@ -32,6 +28,6 @@ class CreateOfflinePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offline_payments');
+        Schema::dropIfExists('product_user');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCashPaymentsTable extends Migration
+class CreateAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreateCashPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cash_payments', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount',20,3);
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('cash_receiver')->nullable();
-            $table->timestamp('pay_date');
+            $table->foreignId('city_id')->constrained('cities')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('postal_code');
+            $table->text('address');
+            $table->string('no');
+            $table->string('unit');
+            $table->string('recipient_first_name');
+            $table->string('recipient_last_name');
+            $table->string('mobile');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -32,6 +37,6 @@ class CreateCashPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cash_payments');
+        Schema::dropIfExists('addresses');
     }
 }

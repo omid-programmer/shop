@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDeliveryTable extends Migration
+class CreateBannersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDeliveryTable extends Migration
      */
     public function up()
     {
-        Schema::create('delivery', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->decimal('amount',20,3)->nullable();
-            $table->integer('delivery_time')->nullable();
-            $table->string('delivery_time_unit')->nullable();
-            $table->tinyInteger('status')->default(0);       
+            $table->string('title');
+            $table->text('image');
+            $table->string('url');
+            $table->tinyInteger('position')->default(0)->comment('developer explain 0 or 1 or ... in admin\content\banner model ');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +32,6 @@ class CreateDeliveryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery');
+        Schema::dropIfExists('banners');
     }
 }

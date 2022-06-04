@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnlinePaymentsTable extends Migration
+class CreateCashPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateOnlinePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('online_payments', function (Blueprint $table) {
+        Schema::create('cash_payments', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount',20,3);
+            $table->decimal('amount', 20, 3);
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('gateway')->nullable();
-            $table->string('transaction_id')->nullable();
-            $table->text('bank_first_response')->nullable();
-            $table->text('bank_second_response')->nullable();
+            $table->string('cash_receiver')->nullable();
+            $table->timestamp('pay_date');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +32,6 @@ class CreateOnlinePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('online_payments');
+        Schema::dropIfExists('cash_payments');
     }
 }
