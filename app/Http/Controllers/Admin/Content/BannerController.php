@@ -88,15 +88,17 @@ class BannerController extends Controller
      */
     public function update(BannerRequest $request, Banner $banner, ImageService $imageService)
     {
+
         $inputs = $request->all();
 
 
         if ($request->hasFile('image')) {
             if (!empty($banner->image)) {
-                $imageService->deleteDirectoryAndFiles($banner->image['directory']);
+                $imageService->deleteImage($banner->image);
             }
             $imageService->setExclusiveDirectory('images' . DIRECTORY_SEPARATOR . 'banner');
             $result = $imageService->save($request->file('image'));
+
             if ($result === false) {
                 return redirect()->route('admin.content.banner.index')->with('swal-error', 'آپلود تصویر با خطا مواجه شد');
             }

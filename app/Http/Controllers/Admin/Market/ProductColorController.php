@@ -88,8 +88,9 @@ class ProductColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product, ProductColor $color)
     {
-        //
+        $color->delete();
+        return back();
     }
 }
